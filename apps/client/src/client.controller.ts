@@ -1,12 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
-import { ClientService } from './client.service';
+import { Body, Controller, Post } from '@nestjs/common';
+import { PayloadHandlerUseCase } from './use-cases/payload-handler.use-case';
+import { PayloadDto } from './dto/payloadDto';
 
 @Controller()
 export class ClientController {
-  constructor(private readonly clientService: ClientService) {}
+  constructor(private readonly payloadHandler: PayloadHandlerUseCase) {}
 
-  @Get()
-  getHello(): string {
-    return this.clientService.getHello();
+  @Post('get-updates')
+  getUpdates(@Body() payload: PayloadDto) {
+    return this.payloadHandler.execute(payload);
   }
 }
