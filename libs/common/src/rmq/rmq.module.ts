@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Global, Inject, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,6 +24,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         options: {
           urls: ['amqps://djhyiuhg:1gbKM0em3ebeveuri6Mwq6isJ7RuJico@cow.rmq2.cloudamqp.com/djhyiuhg'],
           queue: 'notifications_queue',
+          noAck: false,
           queueOptions: {
             durable: false,
           },
@@ -30,5 +32,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
+  exports: [ClientsModule],
 })
 export class RmqModule {}

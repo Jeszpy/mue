@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { DatabaseConfig } from '@app/common/database/database.config';
+import { DatabaseConfig, models } from '@app/common/database/database.config';
 
 @Module({
   imports: [
@@ -10,14 +10,15 @@ import { DatabaseConfig } from '@app/common/database/database.config';
       isGlobal: true,
       envFilePath: ['./libs/common/src/database/.env'],
       validationSchema: Joi.object({
-        HOST: Joi.string().required(),
-        PORT: Joi.number().required(),
-        USERNAME: Joi.string().required(),
-        PASSWORD: Joi.string().required(),
-        DATABASE: Joi.string().required(),
+        DB_HOST: Joi.string().required(),
+        DB_PORT: Joi.number().required(),
+        DB_USERNAME: Joi.string().required(),
+        DB_PASSWORD: Joi.string().required(),
+        DB_DATABASE: Joi.string().required(),
       }),
     }),
     SequelizeModule.forRootAsync({ useClass: DatabaseConfig }),
+    SequelizeModule.forFeature(models),
   ],
 })
 export class DatabaseModule {}

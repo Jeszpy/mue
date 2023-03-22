@@ -16,7 +16,7 @@ export class RegisterTelegramWebHookUseCase implements OnApplicationBootstrap {
   private setWebhookUrl = `${this.baseUrl}/setWebhook`;
 
   //TODO: use Ngrok in dev mode only!
-  private getUpdatesEndpoint = 'https://39a2-46-53-254-124.eu.ngrok.io/get-updates';
+  private getUpdatesEndpoint = 'https://2477-46-53-254-124.eu.ngrok.io/get-updates';
 
   private async registerTelegramWebHook() {
     return firstValueFrom(

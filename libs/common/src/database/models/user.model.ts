@@ -1,22 +1,35 @@
-import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { Column, Model, Table, DataType } from 'sequelize-typescript';
 
-@Table
-export class User extends Model {
-  @PrimaryKey
+@Table({ tableName: 'user' })
+export class UserModel extends Model {
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+  })
   id: string;
 
-  @Column
+  @Column({
+    type: DataType.INTEGER,
+    unique: true,
+  })
   telegramId: number;
 
-  @Column
+  @Column({
+    type: DataType.STRING,
+  })
   nickName: string;
 
-  @Column
+  @Column({
+    type: DataType.STRING,
+  })
   firstName: string;
 
-  @Column
+  @Column({
+    type: DataType.STRING,
+  })
   lastName: string;
 
-  @Column({ defaultValue: false })
+  @Column({ type: DataType.BOOLEAN, defaultValue: false })
   isActive: boolean;
 }
