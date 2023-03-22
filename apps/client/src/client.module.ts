@@ -1,11 +1,12 @@
-import { ConsoleLogger, Logger, Module } from '@nestjs/common';
-import { ClientController } from './client.controller';
-import { ClientService } from './client.service';
+import { Module } from '@nestjs/common';
+import { ClientController } from './api/client.controller';
 import { RegisterTelegramWebHookUseCase } from './use-cases/register-telegram-web-hook.use-case';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { HttpModule } from '@nestjs/axios';
 import { PayloadHandlerUseCase } from './use-cases/payload-handler.use-case';
+import { DatabaseModule } from '@app/common';
+import { RmqModule } from '@app/common/rmq/rmq.module';
 
 @Module({
   imports: [
@@ -18,8 +19,10 @@ import { PayloadHandlerUseCase } from './use-cases/payload-handler.use-case';
       }),
     }),
     HttpModule,
+    // DatabaseModule,
+    RmqModule,
   ],
   controllers: [ClientController],
-  providers: [ClientService, RegisterTelegramWebHookUseCase, PayloadHandlerUseCase],
+  providers: [RegisterTelegramWebHookUseCase, PayloadHandlerUseCase],
 })
 export class ClientModule {}

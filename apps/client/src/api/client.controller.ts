@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { PayloadHandlerUseCase } from './use-cases/payload-handler.use-case';
-import { PayloadDto } from './dto/payloadDto';
+import { PayloadHandlerUseCase } from '../use-cases/payload-handler.use-case';
+import { PayloadDto } from '../dto/payloadDto';
 
 @Controller()
 export class ClientController {
