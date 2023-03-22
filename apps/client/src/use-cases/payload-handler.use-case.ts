@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PayloadDto } from '../dto/payloadDto';
 import { ClientProxy } from '@nestjs/microservices';
-import { AmqpConnectionManager, AmqpConnectionManagerClass } from 'amqp-connection-manager';
 import { randomUUID } from 'crypto';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class PayloadHandlerUseCase {
@@ -12,7 +12,7 @@ export class PayloadHandlerUseCase {
     const requestId = randomUUID();
     switch (payload.message.text) {
       case '/start':
-        return this.client.send('command.start', { requestId, payload });
+        await this.client.emit('command.start', { requestId, payload });
         break;
       case '/help':
         console.log('its help');

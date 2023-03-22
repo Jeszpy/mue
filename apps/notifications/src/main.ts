@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { NotificationsModule } from './notifications.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(NotificationsModule, {
@@ -13,8 +12,10 @@ async function bootstrap() {
       queueOptions: {
         durable: false,
       },
+      prefetchCount: 1,
     },
   });
   await app.listen();
 }
+
 bootstrap();
