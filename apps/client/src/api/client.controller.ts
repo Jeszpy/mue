@@ -8,7 +8,7 @@ export class ClientController {
 
   @Post('get-updates')
   async getUpdates(@Body() payload: PayloadDto) {
-    console.log(payload.message.text);
+    console.log('client controller');
     return this.payloadHandler.execute(payload);
   }
 }

@@ -20,5 +20,6 @@ import { DatabaseConfig, models } from '@app/common/database/database.config';
     SequelizeModule.forRootAsync({ useClass: DatabaseConfig }),
     SequelizeModule.forFeature(models),
   ],
+  exports: [SequelizeModule],
 })
 export class DatabaseModule {}

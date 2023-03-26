@@ -19,6 +19,7 @@ import { RmqModule } from '@app/common/rmq/rmq.module';
       }),
     }),
     HttpModule,
+    RmqModule.register({ name: 'USERS' }),
     RmqModule.register({ name: 'NOTIFICATIONS' }),
   ],
   controllers: [ClientController],

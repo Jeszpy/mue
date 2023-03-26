@@ -5,6 +5,7 @@ import { TelegramAdapter } from './adapters/telegram.adapter';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { HttpModule } from '@nestjs/axios';
+import { StartCommandUseCase } from './use-cases/start-command.use-case';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { HttpModule } from '@nestjs/axios';
     HttpModule,
   ],
   controllers: [NotificationsController],
-  providers: [NotificationsService, TelegramAdapter],
+  providers: [NotificationsService, TelegramAdapter, StartCommandUseCase],
 })
 export class NotificationsModule {}
